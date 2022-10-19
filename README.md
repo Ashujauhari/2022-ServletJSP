@@ -58,7 +58,19 @@ processing
 
 ## Http 
 ------------------------------------------------------------------------------------
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages 
+**Http reuqest Message **
+<img width="667" alt="image" src="https://user-images.githubusercontent.com/27730844/196683733-a2a575fb-9800-4e21-ba86-9338f85de017.png">
+
+
+
+**Http Response Message**
+<img width="664" alt="image" src="https://user-images.githubusercontent.com/27730844/196683844-7dc24619-16a2-462a-9c1b-87e2c8e05731.png">
+
 https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol 
+
+<img width="784" alt="image" src="https://user-images.githubusercontent.com/27730844/196682819-585f036d-7015-450a-aab4-dd2bcf30cc47.png">
+
 GET requests can be cached
 GET requests remain in the browser history
 GET requests should never be used when dealing with sensitive data
@@ -69,29 +81,102 @@ POST requests are never cached
 POST requests do not remain in the browser history
 POST requests have no restrictions on data length
 
-## Web Application
+## Options to create Web Application
+
+##3 CGI(Common Gateway Interface)
 ------------------------------------------------------------------------------------
+CGI technology enables the web server to call an external program and pass HTTP request information to the external program to process the request
 
+** Disadvantages:** 
+If the number of clients increases, it takes more time for sending the response.
+For each request, it starts a process, and the web server is limited to start processes.
+It uses platform dependent language
 
-
-
-## CGI
+##3 Servlet
 ------------------------------------------------------------------------------------
+1. Better Performance
+2. Robust
+3. Secure
+4. Portability
 
-## Servlet
-------------------------------------------------------------------------------------
+
 
 ### What is Servlet
 
-### Servlet API
+1. Servlet technology is used to create a web application
+2. Servlet is a technology which is used to create a web application.
+3. Servlet is an API that provides many interfaces and classes including documentation.
+4. Servlet is an interface that must be implemented for creating any Servlet.
+5. Servlet is a class that extends the capabilities of the servers and responds to the incoming requests. It can respond to any requests.
+6. Servlet is a web component that is deployed on the server to create a dynamic web page
 
+<img width="505" alt="image" src="https://user-images.githubusercontent.com/27730844/196682481-55a3ca18-b815-40b2-b945-ce610f363f1f.png">
+
+### Servlet API
+---------------
+1. javax.servlet - Protocol Specific
+2. javax.servlet.http - Http Protocol Specific
+
+**javax.servlet**
+_Interfaces_
+Servlet
+ServletRequest
+ServletResponse
+RequestDispatcher
+ServletConfig
+ServletContext
+
+_Class_
+GenericServlet
+ServletInputStream
+ServletOutputStream
+
+**javax.servlet.http**
+
+_interfaces_
+HttpServletRequest
+HttpServletResponse
+HttpSession
+HttpSessionListener
+
+_Classes_
+HttpServlet
+Cookie
 
 ## Servlet Life Cycle
 ------------------------------------------------------------------------------------
+There are mainly three life cycle methods of a servlet, which we can describe as:
 
+init()
+service()
+destroy()
 
-## Servlet API
-------------------------------------------------------------------------------------
+<img width="687" alt="image" src="https://user-images.githubusercontent.com/27730844/196686656-d5ecbcfd-e615-4351-95bb-bac0c7f940e9.png">
+
+1. Servlet class is loaded.
+  - The classloader is responsible to load the servlet class. The servlet class is loaded when the first request for the servlet is received by the web container.
+  
+2. Servlet instance is created.
+ -  The web container creates the instance of a servlet after loading the servlet class. The servlet instance is created only once in the servlet life cycle.
+ 
+3. init method is invoked.
+ - it initialises the servlet. Servlet. init() indicates that the servlet instance was created successfully.Servlet container calls the Servlet.init() method to denote that this Servlet instance is successfully instantiated and is ready for the service.
+public void init(ServletConfig config) throws ServletException {    //initialization code }
+
+4. service method is invoked.
+- The web container calls the service method each time when request for the servlet is received. If servlet is not initialized, it follows the first three steps as described above then calls the service method. If servlet is initialized, it calls the service method.
+
+public void service(ServletRequest request, ServletResponse response)   
+  throws ServletException, IOException  
+  
+8. destroy method is invoked.
+The web container calls the destroy method before removing the servlet instance from the service. It gives the servlet an opportunity to clean up any resource for example memory, thread etc. 
+ public void destroy()  
+
+## Ways to create Servlet ?
+1. By implementing Servlet interface,
+2. By inheriting GenericServlet class, (or)
+3. By inheriting HttpServlet class
 
 ## Software Requirement
 ------------------------------------------------------------------------------------
@@ -104,8 +189,6 @@ POST requests have no restrictions on data length
 ## Enviornment Setup
 ------------------------------------------------------------------------------------
 1. Download the eclipse and click on Eclipse icon.
-2. 
-
 
 ## Lab: Create a Hello Servlet
 ------------------------------------------------------------------------------------
@@ -116,6 +199,24 @@ POST requests have no restrictions on data length
 4. Create a new Servlet -> Rc the src -> Select new -> Others-> Servlet-> Next-> packagename: com.hello -> class: HelloServlet
  <img width="430" alt="image" src="https://user-images.githubusercontent.com/27730844/196421450-f535fdcf-be5d-4844-be7c-92bcc3133deb.png">
 5. Run it -> Rc-> Run 
+6. Add a Web Deployment Descriptor
+
+```
+<web-app>  
+  
+<servlet>  
+<servlet-name>hi</servlet-name>  
+<servlet-class>com.hello.HelloServlet</servlet-class>  
+</servlet>  
+  
+<servlet-mapping>  
+<servlet-name>hi</servlet-name>  
+<url-pattern>/welcome</url-pattern>  
+</servlet-mapping>  
+  
+</web-app>
+
+```
 
 # JSP
 ------------------------------------------------------------------------------------
