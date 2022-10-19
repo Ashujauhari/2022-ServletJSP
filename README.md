@@ -197,10 +197,25 @@ The web container calls the destroy method before removing the servlet instance 
 <img width="284" alt="image" src="https://user-images.githubusercontent.com/27730844/196420493-056e895a-3010-474e-805c-b546c23acf9d.png">
 3. Rc-> Configure -> Convert to Maven -> Finish
 4. Create a new Servlet -> Rc the src -> Select new -> Others-> Servlet-> Next-> packagename: com.hello -> class: HelloServlet
+
+```
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html"); 
+		PrintWriter out = response.getWriter(); 
+		out.println(
+		"<HTML>\n" + 
+		"<HEAD><TITLE>Hello</TITLE></HEAD>\n" + 
+		"<BODY BGCOLOR=\"#FDF5E6\">\n" + 
+		"<H1>Hello</H1>\n" + 
+		"</BODY></HTML>");
+	
+	}
+```
  <img width="430" alt="image" src="https://user-images.githubusercontent.com/27730844/196421450-f535fdcf-be5d-4844-be7c-92bcc3133deb.png">
 5. Run it -> Rc-> Run 
-6. Add a Web Deployment Descriptor
-
+6. http://localhost:8080/WishProj/helloServlet
+7. Add a Web Deployment Descriptor
 ```
 <web-app>  
   
@@ -215,20 +230,69 @@ The web container calls the destroy method before removing the servlet instance 
 </servlet-mapping>  
   
 </web-app>
+```
+8. Create index.jsp in webapp folder-> index.jsp
+```
+<html>
+<body>
+<h1> Hello JSP</h1>
+</body>
+</html>
+```
+http://localhost:8080/WishProj/ -> it will display index.jsp directly
 
+9. Add a link to open HelloServlet  to index.jsp 
+```
+<html>
+
+<body>
+<h1> Hello JSP</h1>
+<a href="welcome">Click Here</a>
+</body>
+</html>
 ```
 
 # JSP
 ------------------------------------------------------------------------------------
 ## What is JSP
 ------------------------------------------------------------------------------------
+JSP technology is used to create web application just like Servlet technology. A JSP page consists of HTML tags and JSP tags. The JSP pages are easier to maintain than Servlet because we can separate designing and development. It provides some additional features such as Expression Language, Custom Tags, etc.
+
 
 ## Advantage of JSP over Servlet
 ------------------------------------------------------------------------------------
+1. Extension to Servlet
+2. Easy to maintain
+3. Less code than Servlet
 
 ## Life cycle of JSP
 ------------------------------------------------------------------------------------
+Translation of
+JSP Page
+Compilation of JSP Page
+Classloading (the classloader loads class file)
+Instantiation (Object of the Generated Servlet is created).
+Initialization ( the container invokes jspInit() method).
+Request processing ( the container invokes _jspService() method).
+Destroy ( the container invokes jspDestroy() method).
 
+Lab: Create a Login page in Login.jsp
+step 1: Create a Login page in index.jsp
+```
+<form action="login.jsp" method="post">
+		<table style="with: 50%">
+
+			<tr>
+				<td>UserName</td>
+				<td><input type="text" name="username" /></td>
+			</tr>
+				<tr>
+				<td>Password</td>
+				<td><input type="password" name="password" /></td>
+			</tr>
+		</table>
+		<input type="submit" value="Login" /></form>
+```
 ## Implicit Objects
 ------------------------------------------------------------------------------------
 
