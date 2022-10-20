@@ -252,9 +252,8 @@ http://localhost:8080/WishProj/ -> it will display index.jsp directly
 </html>
 ```
 
-**ServletContext vs ServletConfig**
 
-ServletConfig (Servlet Level)
+####ServletConfig (Servlet Level)
 _______________
 An object of ServletConfig is created by the web container for each servlet.  This object can be used to get configuration information from web.xml file.
 
@@ -279,6 +278,7 @@ public ServletContext getServletContext():Returns an object of ServletContext.
 Lab: Define a initparameter for default user at servlet level and display value on page. 
 
 Step 1: Add init parameter in web.xml
+
 ```
 <servlet>  
 <servlet-name>hi</servlet-name>  
@@ -294,6 +294,7 @@ Step 1: Add init parameter in web.xml
 <servlet-name>hi</servlet-name>  
 <url-pattern>/welcome</url-pattern>  
 </servlet-mapping> 
+
 ```
 
 Step 2: Fetch the initialparameter from web.xml in servlet
@@ -304,7 +305,7 @@ Step 2: Fetch the initialparameter from web.xml in servlet
 		    out.print("The default user is : "+ username);	
 ```
 	
-ServletContext (WebContainer)
+#### ServletContext (WebContainer)
 ----------------
 An object of ServletContext is created by the web container at time of deploying the project. This object can be used to get configuration information from web.xml file. There is only one ServletContext object per web application.
 If any information is shared to many servlet, it is better to provide it from the web.xml file using the <context-param> element.
@@ -337,7 +338,8 @@ Lab: Create a company attribute at servlet level and print it  page.
 
 
 
-
+**ServletContext vs ServletConfig**
+	
 <img width="620" alt="image" src="https://user-images.githubusercontent.com/27730844/196868944-c00346da-cff3-47e3-98e0-05ec657336c3.png">
 
 
