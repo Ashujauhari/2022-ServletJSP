@@ -252,6 +252,96 @@ http://localhost:8080/WishProj/ -> it will display index.jsp directly
 </html>
 ```
 
+**ServletContext vs ServletConfig**
+
+ServletConfig (Servlet Level)
+_______________
+An object of ServletConfig is created by the web container for each servlet.  This object can be used to get configuration information from web.xml file.
+
+-----Methods----
+public String getInitParameter(String name):Returns the parameter value for the specified parameter name.
+public Enumeration getInitParameterNames():Returns an enumeration of all the initialization parameter names.
+public String getServletName():Returns the name of the servlet.
+public ServletContext getServletContext():Returns an object of ServletContext.
+
+**How to use ServletConfig**
+<web-app>  
+  <servlet>  
+    ......  
+    <init-param>  
+      <param-name>parametername</param-name>  
+      <param-value>parametervalue</param-value>  
+    </init-param>  
+    ......  
+  </servlet>  
+</web-app>  
+
+Lab: Define a initparameter for default user at servlet level and display value on page. 
+
+Step 1: Add init parameter in web.xml
+```
+<servlet>  
+<servlet-name>hi</servlet-name>  
+<servlet-class>com.hello.HelloServlet</servlet-class>  
+
+<init-param>  
+<param-name>username</param-name>  
+<param-value>Guest</param-value>  
+</init-param> 
+</servlet>  
+  
+<servlet-mapping>  
+<servlet-name>hi</servlet-name>  
+<url-pattern>/welcome</url-pattern>  
+</servlet-mapping> 
+```
+
+Step 2: Fetch the initialparameter from web.xml in servlet
+```
+//--------ServletConfig ---- Servlet level--------
+		 ServletConfig config=getServletConfig();  
+		    String username=config.getInitParameter("username");  
+		    out.print("The default user is : "+ username);	
+```
+	
+ServletContext (WebContainer)
+----------------
+An object of ServletContext is created by the web container at time of deploying the project. This object can be used to get configuration information from web.xml file. There is only one ServletContext object per web application.
+If any information is shared to many servlet, it is better to provide it from the web.xml file using the <context-param> element.
+
+public String getInitParameter(String name):Returns the parameter value for the specified parameter name.
+public Enumeration getInitParameterNames():Returns the names of the context's initialization parameters.
+public void setAttribute(String name,Object object):sets the given object in the application scope.
+public Object getAttribute(String name):Returns the attribute for the specified name.
+public Enumeration getInitParameterNames():Returns the names of the context's initialization parameters as an Enumeration of String objects.
+public void removeAttribute(String name):Removes the attribute with the given name from the servlet context.
+
+Lab: Create a company attribute at servlet level and print it  page.
+1. Create a servlet
+2. Open web.xml  and define an attribute in web.xml outside the <servlet> tag as it is at web container level
+
+<context-param>  
+<param-name>company</param-name>  
+<param-value>Cognizant</param-value>  
+</context-param>
+
+3. Update the servlet to print its value
+  ```
+		//creating ServletContext object  
+		ServletContext context=getServletContext();  
+		  
+		//Getting the value of the initialization parameter and printing it  
+		String companyname=context.getInitParameter("company");  
+		out.println("\n Your company name is="+companyname);  
+```
+
+
+
+
+<img width="620" alt="image" src="https://user-images.githubusercontent.com/27730844/196868944-c00346da-cff3-47e3-98e0-05ec657336c3.png">
+
+
+
 # JSP
 ------------------------------------------------------------------------------------
 ## What is JSP
@@ -307,6 +397,8 @@ step 1: Create a Login page in index.jsp
 
 ## implicit objects
 ------------------------------------------------------------------------------------
+<img width="557" alt="image" src="https://user-images.githubusercontent.com/27730844/196868141-8361f845-cc56-4d31-bb5c-a48faf92745b.png">
+
 
 
 ## Declarative Elements
