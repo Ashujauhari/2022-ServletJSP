@@ -405,9 +405,70 @@ JspError
 ## JSP Scriplet elements
 ------------------------------------------------------------------------------------
 ### Scriplet tags
-### Expression Tags
-### declaration tags
+	- A scriptlet tag is used to execute java source code in JSP.
+	- <%  java source code %>  
+	
+	#### How to pass a parameter from one jsp to another.
+	
+	```
+	index.jsp
+	
+	<html>  
+	<body>  
+	<form action="welcome.jsp">  
+	<input type="text" name="uname">  
+	<input type="submit" value="go"><br/>  
+	</form>  
+	</body>  
+	</html> 
+	```
+	
+	```
+	<html>  
+	<body>  
+	<%  
+	String name=request.getParameter("uname");  
+	out.print("welcome "+name);  
+	%>  
+	</form>  
+	</body>  
+	</html>
+	
+	```
 
+	
+### Expression Tags
+	It is written to the output stream of the response.
+	```
+	index.jsp 
+	
+	<form action="welcome.jsp">  
+	<input type="text" name="uname"><br/>  
+	<input type="submit" value="go">  
+	</form>  
+	```
+	
+	welcome.jsp
+	```
+	<body>  
+	<%= "Welcome "+request.getParameter("uname") %>  
+	</body> 
+	```
+		
+### declaration tags
+	It is used to declare fields and methods.
+	```
+	<body>  
+	<%! int data=50;
+	    int cube(int n){  
+	    return n*n*n*;  
+	 %>  
+		
+	<%= "Value of the variable is:"+data %>  
+	<%= "Cube of 3 is:"+cube(3) %>
+	</body>  
+		
+		
 ## implicit objects
 ------------------------------------------------------------------------------------
 <img width="557" alt="image" src="https://user-images.githubusercontent.com/27730844/196868141-8361f845-cc56-4d31-bb5c-a48faf92745b.png">
@@ -424,14 +485,33 @@ JspError
 ## JSP CRUD
 ------------------------------------------------------------------------------------
 
-##  Lab: Accept the username and Display the Hello.jsp on button click
-------------------------------------------------------------------------------------
-
 ## Lab: Create Login page and display message the accordingly.
 ------------------------------------------------------------------------------------
-
-
-## Lab: Create a Employee list page.
+1. Create a login.jsp to display get username and password
+2. Create a LoginDao class to have validate(String username and Password) to validate the username password form DB and return T/F.
+3. Create a WelcomeServlet to print the Welcome message with username.
+4. Create a LoginServlet 
+	a. Get the entered username and password
+	b. Call validate(String username and Password) 
+	c. If username is correct
+		call Welcome servlet.
+		```
+			if(LoginDao.validate(n, p)){  
+        			RequestDispatcher rd=request.getRequestDispatcher("servlet2");  
+        			rd.forward(request,response);  
+    			}  
+		```
+	d. else print the message on same page.
+		```
+		out.print("Sorry username or password error");  
+       		 RequestDispatcher rd=request.getRequestDispatcher("index.html");  
+        	rd.include(request,response);  
+    		} 
+		```
+5. Make sure the  Servlet mapping is define in web.xml
+		
+		
+Assingment  Lab: Create a Employee list page.
 ------------------------------------------------------------------------------------
 
 
@@ -494,7 +574,6 @@ language.
 - It is considered to be a languageindependent data format.
 - It serves as an alternative to the
 use of the XML format
-
 
 {
  "firstName": "John",
