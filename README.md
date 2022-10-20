@@ -385,12 +385,23 @@ step 1: Create a Login page in index.jsp
 		</table>
 		<input type="submit" value="Login" /></form>
 ```
-## Implicit Objects
-------------------------------------------------------------------------------------
 
 ## JSP API
 ------------------------------------------------------------------------------------
+The javax.servlet.jsp package has two interfaces and classes.The two interfaces are as follows:
 
+JspPage
+HttpJspPage
+The classes are as follows:
+
+JspWriter
+PageContext
+JspFactory
+JspEngineInfo
+JspException
+JspError
+	
+	
 ## JSP Scriplet elements
 ------------------------------------------------------------------------------------
 ### Scriplet tags
